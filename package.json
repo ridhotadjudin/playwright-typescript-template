@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test:e2e": "npx playwright test tests/",
+    "test:e2e": "npx playwright test",
     "test:e2e:all": "npx playwright test tests --project=all-browsers-and-tests",
-    "test:e2e:smoke": "npx playwright test tests-examples/ --grep @smoke --project=all-browsers-and-tests"
+    "test:e2e:smoke": "npx playwright test tests-examples/ --grep @smoke --project=chromium"
   },
   "keywords": [],
   "author": "ridhotadjudin",
