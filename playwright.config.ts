@@ -11,6 +11,14 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './tests',
+
+  // globalSetup: require.resolve('./global-setup'),
+
+  timeout: 60*1000, //max time one test can run for
+
+  expect: {
+    timeout: 5000  //max time expect() should wait for the condition to met
+  },
   
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -46,7 +54,7 @@ export default defineConfig({
   },
 
   /* Folder for test artifact such as screenshots, videos, traces, etc. */
-  // outputDir: 'test-results/',
+  outputDir: 'test-results/',
 
   /* Configure projects for major browsers */
   projects: [

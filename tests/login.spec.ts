@@ -1,27 +1,34 @@
 import { test, expect, Browser, Page, Locator } from '@playwright/test';
+import { time } from 'console';
+import { TIMEOUT } from 'dns';
 import { webkit, chromium, firefox } from 'playwright';
+import { setTimeout } from 'timers';
 
 test('login test', async({page})=>{
   await page.goto("http://staging-chief.nexcloud.id/");
 
   await expect(page).toHaveTitle('Nexchief');
   
-  const inputUsername:Locator = await page.locator('#username');
-  const inputPassword:Locator = await page.locator('#password');
-  const btnLogin:Locator = await page.locator("[type='submit']");
+  const inputUsername:Locator = await page.locator("//input[@id='username']");
+  const inputPassword:Locator = await page.locator("//input[@id='password']");
+  const btnLogin:Locator = await page.locator("button[type='submit']");
 
-  await inputUsername.fill("xxxxxxxxxxxxx");
-  await inputUsername.fill("xxxxxxxxxxxxx");
+  await inputUsername.fill("xxxxxxxxxxxx");
+  console.log("Success input username");
+
+  await inputPassword.fill("xxxxxxxxxxxxx");
+  console.log("Success input password");
+
   await btnLogin.click();
+  console.log("Success click login");
   
   const titlePortalPage = await page.title();
   console.log("Portal Page title: ", titlePortalPage);
 
-  await page.screenshot({path: 'portal.png'});
+  await page.screenshot({path: 'test-results/portal.png'});
 
   await expect(titlePortalPage).toEqual('Nexchief');
 
-  page.close();
 });
 
 // test('has title', async ({ page }) => {
