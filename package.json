@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
+    "report": "npx playwright show-report",
     "test:e2e:all": "npx playwright test tests --project=all-browsers-and-tests",
     "test:e2e:smoke": "npx playwright test tests-examples/ --grep @smoke --project=chromium"
   },

@@ -3,6 +3,7 @@ import { time } from 'console';
 import { TIMEOUT } from 'dns';
 import { webkit, chromium, firefox } from 'playwright';
 import { setTimeout } from 'timers';
+import { username, password } from '../.cert/Credentials.ts'
 
 test('login test', async({page})=>{
   await page.goto("http://staging-chief.nexcloud.id/");
@@ -13,14 +14,17 @@ test('login test', async({page})=>{
   const inputPassword:Locator = await page.locator("//input[@id='password']");
   const btnLogin:Locator = await page.locator("button[type='submit']");
 
-  await inputUsername.fill("xxxxxxxxxxxx");
+  await inputUsername.fill(username);
   console.log("Success input username");
+  await page.waitForTimeout(2000);
 
-  await inputPassword.fill("xxxxxxxxxxxxx");
+  await inputPassword.fill(password);
   console.log("Success input password");
+  await page.waitForTimeout(2000);
 
   await btnLogin.click();
   console.log("Success click login");
+  await page.waitForTimeout(3000);
   
   const titlePortalPage = await page.title();
   console.log("Portal Page title: ", titlePortalPage);
