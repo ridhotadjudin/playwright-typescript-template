@@ -6,3 +6,4 @@ Brief description of each folder:
 5. Data/: This folder contains the test data require for testing.
 6. global-setup.js/: Setup file to set before initialising the test.
 7. Testconfig.js: This file contains the different environment url ( Web and API )
+8. Testconfig.js: This file contains the different environment url ( Web and API )
