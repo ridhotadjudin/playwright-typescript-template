@@ -3,10 +3,10 @@ import { time } from 'console';
 import { TIMEOUT } from 'dns';
 import { webkit, chromium, firefox } from 'playwright';
 import { setTimeout } from 'timers';
-import { username, password } from '../.cert/Credentials.ts'
+import { baseUrl, username, password } from '../.cert/Credentials.ts'
 
 test('login test', async({page})=>{
-  await page.goto("http://staging-chief.nexcloud.id/");
+  await page.goto(baseUrl);
 
   await expect(page).toHaveTitle('Nexchief');
   
