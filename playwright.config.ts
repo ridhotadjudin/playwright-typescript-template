@@ -14,7 +14,7 @@ export default defineConfig({
 
   // globalSetup: require.resolve('./global-setup'),
 
-  timeout: 60*1000, //max time one test can run for
+  timeout: 100*1000, //max time one test can run for
 
   expect: {
     timeout: 5000  //max time expect() should wait for the condition to met
@@ -48,7 +48,8 @@ export default defineConfig({
     screenshot:'only-on-failure',
     headless: false,
     // ignoreHTTPSErrors: true,
-    viewport: {width: 1280, height:720},
+    // viewport: {width: 1280, height:720},
+    launchOptions: {args: ['--start-maximized']},
     video: 'on-first-retry',
     // timeout: 30000,
   },

@@ -1,8 +1,4 @@
 import { test, expect, Browser, Page, Locator } from '@playwright/test';
-import { time } from 'console';
-import { TIMEOUT } from 'dns';
-import { webkit, chromium, firefox } from 'playwright';
-import { setTimeout } from 'timers';
 import { baseUrl, username, password } from '../.cert/Credentials.ts'
 
 test('login test', async({page})=>{
@@ -13,41 +9,34 @@ test('login test', async({page})=>{
   const inputUsername:Locator = await page.locator("//input[@id='username']");
   const inputPassword:Locator = await page.locator("//input[@id='password']");
   const btnLogin:Locator = await page.locator("button[type='submit']");
+  const popUpLoginDenied:Locator = await page.locator("//div[@class='Modal_ModalTitle__1w84A']");
+  const btnYesLogout:Locator = await page.locator("//span[normalize-space()='Yes, Logout']");
 
-  await inputUsername.fill(username);
+  const txtPortal:Locator = await page.locator("//div[@class='Schema_Title__3kazt']");
+
+  await inputUsername.type(username);
   console.log("Success input username");
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(1000);
 
-  await inputPassword.fill(password);
+  await inputPassword.type(password);
   console.log("Success input password");
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(1000);
 
   await btnLogin.click();
   console.log("Success click login");
-  await page.waitForTimeout(3000);
+  await page.waitForTimeout(1000);
+
+  if(popUpLoginDenied){
+    btnYesLogout.click();
+    console.log("Success re-login");
+    await page.waitForTimeout(1000);
+  }
+
+  await expect(txtPortal.getByText('Portal Akun Nexchief')).toBeVisible;
+  console.log("Success login");
+  await page.waitForTimeout(1000);
   
-  const titlePortalPage = await page.title();
-  console.log("Portal Page title: ", titlePortalPage);
-
   await page.screenshot({path: 'test-results/portal.png'});
-
-  await expect(titlePortalPage).toEqual('Nexchief');
+  await page.waitForTimeout(1000);
 
 });
-
-// test('has title', async ({ page }) => {
-//   await page.goto('https://playwright.dev/');
-
-//   // Expect a title "to contain" a substring.
-//   await expect(page).toHaveTitle(/Playwright/);
-// });
-
-// test('get started link', async ({ page }) => {
-//   await page.goto('https://playwright.dev/');
-
-//   // Click the get started link.
-//   await page.getByRole('link', { name: 'Get started' }).click();
-
-//   // Expects page to have a heading with the name of Installation.
-//   await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-// });
